@@ -28,7 +28,15 @@
         </StatusBar>
         <TabControl Grid.Row="1">
             <TabItem Header="以教師分類課程">
-                <TreeView x:Name="tvTeacher" Background="AliceBlue"/>
+                <TreeView x:Name="tvTeacher" Background="AliceBlue">
+                    <TreeView.Resources>
+                        <HierarchicalDataTemplate DataType="{x:Type local:Teacher}" ItemsSource="{Binding TeachingCourses}">
+                            <StackPanel Orientation="Horizontal">
+                                
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                    </TreeView.Resources>
+                </TreeView>
             </TabItem>
             <TabItem Header="所有課程">
                 <ListBox x:Name="lbCourse" Background="LightCyan"/>
