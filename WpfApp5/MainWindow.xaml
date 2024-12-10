@@ -7,6 +7,24 @@
         mc:Ignorable="d"
         Title="選課系統Ver1" Height="450" Width="800">
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="500*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="500*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="Beige" Orientation="Horizontal">
+            <Label Content="學生" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="60" Height="50" FontSize="14" Margin="50, 0, 0, 0" HorizontalContentAlignment="Center"/>
+            <ComboBox x:Name="cmbStudent" Width="300" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+        </StackPanel>
+        <StatusBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Background="LightGray">
+            <StatusBarItem>
+                <Label x:Name="statusLable" Content="Ready" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="500" Margin="100,0,0,0"/>
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </Window>
