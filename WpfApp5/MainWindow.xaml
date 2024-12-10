@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp5"
         mc:Ignorable="d"
-        Title="選課系統Ver1" Height="450" Width="800">
+        Title="選課系統Ver1" Height="700" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="500*"/>
-            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="500*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="Beige" Orientation="Horizontal">
@@ -26,5 +26,25 @@
                 <Label x:Name="statusLable" Content="Ready" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30" Width="500" Margin="100,0,0,0"/>
             </StatusBarItem>
         </StatusBar>
+        <TabControl Grid.Row="1">
+            <TabItem Header="以教師分類課程">
+                <TreeView x:Name="tvTeacher" Background="AliceBlue"/>
+            </TabItem>
+            <TabItem Header="所有課程">
+                <ListBox x:Name="lbCourse" Background="LightCyan"/>
+            </TabItem>
+        </TabControl>
+        <ListView x:Name="lvRecord" Grid.Column="2" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" Background="#FFE9EFCB">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <Button x:Name="btnAdd" Content="選課" Height="50" Width="70" Margin="0,87,0,0" FontSize="16" FontWeight="Bold" />
+            <Button x:Name="btnDelete" Content="退選" Height="50" Width="70" Margin="0,20,0,0" FontSize="16" FontWeight="Bold" />
+            <Button x:Name="btnSave" Content="儲存" Height="50" Width="70" Margin="0,20,0,0" FontSize="16" FontWeight="Bold" />
+        </StackPanel>
     </Grid>
 </Window>
