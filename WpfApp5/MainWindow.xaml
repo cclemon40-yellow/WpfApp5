@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp5"
         mc:Ignorable="d"
-        Title="選課系統Ver1" Height="700" Width="1000">
+        Title="選課系統Ver2" Height="700" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -32,9 +32,24 @@
                     <TreeView.Resources>
                         <HierarchicalDataTemplate DataType="{x:Type local:Teacher}" ItemsSource="{Binding TeachingCourses}">
                             <StackPanel Orientation="Horizontal">
-                                
+                                <Image Width="20" Height="20" Source="/teacher.png" />
+                                <TextBlock Text="{Binding TeacherName}" FontSize="16" FontWeight="Bold" />
+                                <TextBlock Text="(" FontSize="16"/>
+                                <TextBlock Text="{Binding TeachingCourses.Count}" FontSize="16" Foreground="Blue"/>
+                                <TextBlock Text=")" FontSize="16"/>
                             </StackPanel>
                         </HierarchicalDataTemplate>
+                        <DataTemplate DataType="{x:Type local:Course}">
+                            <StackPanel Orientation="Horizontal" Margin="0, 2, 0, 2">
+                                <Image Width="20" Height="20" Source="/course.png" />
+                                <TextBlock Text="{Binding CourseName}" FontSize="14"/>
+                                <TextBlock Text="(" FontSize="14"/>
+                                <TextBlock Text="{Binding Type}" FontSize="14"/>
+                                <TextBlock Text="{Binding Point}" FontSize="14" FontWeight="Bold"/>
+                                <TextBlock Text="學分)/" FontSize="14"/>
+                                <TextBlock Text="{Binding OpeningClass}" FontSize="14" Background="LightGray"/>
+                            </StackPanel>
+                        </DataTemplate>
                     </TreeView.Resources>
                 </TreeView>
             </TabItem>
