@@ -12,6 +12,12 @@ namespace WpfApp5
         List<Teacher> teachers = new List<Teacher>();
         List<Course> courses = new List<Course>();
         List<Record> records = new List<Record>();
+
+        Student selectedStudent = null;
+        Teacher selectedTeacher = null;
+        Course selectedCourse = null;
+        Record selectedRecord = null;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -48,6 +54,72 @@ namespace WpfApp5
             teachers.Add(teacher3);
 
             tvTeacher.ItemsSource = teachers;
+
+            foreach (Teacher teacher in teachers)
+            {
+                foreach (Course course in teacher.TeachingCourses)
+                {
+                    courses.Add(course);
+                }
+            }
+
+            lbCourse.ItemsSource = courses;
+        }
+
+        private void tvTeacher_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (tvTeacher.SelectedItem is Teacher)
+            {
+                selectedTeacher = tvTeacher.SelectedItem as Teacher;
+                statusLable.Content = $"選取老師:{selectedTeacher.TeacherName}";
+            }
+            if (tvTeacher.SelectedItem is Course)
+            {
+                selectedCourse = tvTeacher.SelectedItem as Course;
+                statusLable.Content = $"選取課程:{selectedCourse.CourseName}";
+            }
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedStudent == null || selectedCourse == null)
+            {
+                MessageBox.Show("請選取學生或課程");
+                return;
+            }
+            else
+            {
+                Record record = new Record()
+                {
+                    SelectedStudent = selectedStudent,
+                    SelectedCourse = selectedCourse
+                };
+
+                foreach (Record r in records)
+                {
+                    if (r.Equals(record))
+                    {
+                        MessageBox.Show("此學生已選取此課程");
+                        return;
+                    }
+                }
+
+                records.Add(record);
+                lvRecord.ItemsSource = records;
+                lvRecord.Items.Refresh();
+            }
+        }
+
+        private void cmbStudent_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            selectedStudent = cmbStudent.SelectedItem as Student;
+            statusLable.Content = $"選取學生:{selectedStudent.StudentName}";
+        }
+
+        private void lbCourse_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            selectedCourse = lbCourse.SelectedItem as Course;
+            statusLable.Content = $"選取課程:{selectedCourse.CourseName}";
         }
     }
 }

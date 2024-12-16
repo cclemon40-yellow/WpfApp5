@@ -19,7 +19,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="Beige" Orientation="Horizontal">
             <Label Content="學生" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="60" Height="50" FontSize="14" Margin="50, 0, 0, 0" HorizontalContentAlignment="Center"/>
-            <ComboBox x:Name="cmbStudent" Width="300" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+            <ComboBox x:Name="cmbStudent" Width="300" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="cmbStudent_SelectionChanged"/>
         </StackPanel>
         <StatusBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Background="LightGray">
             <StatusBarItem>
@@ -28,7 +28,7 @@
         </StatusBar>
         <TabControl Grid.Row="1">
             <TabItem Header="以教師分類課程">
-                <TreeView x:Name="tvTeacher" Background="AliceBlue">
+                <TreeView x:Name="tvTeacher" Background="AliceBlue" SelectedItemChanged="tvTeacher_SelectedItemChanged">
                     <TreeView.Resources>
                         <HierarchicalDataTemplate DataType="{x:Type local:Teacher}" ItemsSource="{Binding TeachingCourses}">
                             <StackPanel Orientation="Horizontal">
@@ -54,7 +54,28 @@
                 </TreeView>
             </TabItem>
             <TabItem Header="所有課程">
-                <ListBox x:Name="lbCourse" Background="LightCyan"/>
+                <ListBox x:Name="lbCourse" Background="LightCyan" SelectionChanged="lbCourse_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" Margin="0, 2, 0, 2">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Width="20" Height="20" Source="/course.png" />
+                                    <TextBlock Text="{Binding CourseName}" FontWeight="Bold" FontSize="14" Foreground="DarkRed"/>
+                                    <TextBlock Text="(" FontSize="14"/>
+                                    <TextBlock Text="{Binding Type}" FontSize="14"/>
+                                    <TextBlock Text="{Binding Point}" FontSize="14" FontWeight="Bold"/>
+                                    <TextBlock Text="學分)/" FontSize="14"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="授課教師：" FontSize="14"/>
+                                    <TextBlock Text="{Binding Tutor.TeacherName}" FontSize="14"/>
+                                    <TextBlock Text="開課班級：" FontSize="14" Margin="30, 0, 0, 0"/>
+                                    <TextBlock Text="{Binding OpeningClass}" FontSize="14" Background="LightGray"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </TabItem>
         </TabControl>
         <ListView x:Name="lvRecord" Grid.Column="2" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" Background="#FFE9EFCB">
@@ -65,7 +86,7 @@
             </ListView.View>
         </ListView>
         <StackPanel Grid.Column="1" Grid.Row="1">
-            <Button x:Name="btnAdd" Content="選課" Height="50" Width="70" Margin="0,87,0,0" FontSize="16" FontWeight="Bold" />
+            <Button x:Name="btnAdd" Content="選課" Height="50" Width="70" Margin="0,87,0,0" FontSize="16" FontWeight="Bold" Click="btnAdd_Click" />
             <Button x:Name="btnDelete" Content="退選" Height="50" Width="70" Margin="0,20,0,0" FontSize="16" FontWeight="Bold" />
             <Button x:Name="btnSave" Content="儲存" Height="50" Width="70" Margin="0,20,0,0" FontSize="16" FontWeight="Bold" />
         </StackPanel>
